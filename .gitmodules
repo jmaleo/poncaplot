@@ -3,4 +3,4 @@
 	url = https://github.com/mitsuba-renderer/nanogui.git
 [submodule "external/ponca"]
 	path = external/ponca
-	url = https://github.com/poncateam/ponca.git
+	url = https://github.com/jmaleo/ponca.git

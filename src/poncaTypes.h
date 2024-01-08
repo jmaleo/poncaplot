@@ -25,3 +25,8 @@ using PlaneFit = Ponca::Basket<DataPoint ,WeightFunc, Ponca::CovariancePlaneFit>
 using SphereFit = Ponca::Basket<DataPoint ,WeightFunc, Ponca::SphereFit>;
 using OrientedSphereFit= Ponca::Basket<DataPoint ,WeightFunc, Ponca::OrientedSphereFit>;
 using UnorientedSphereFit = Ponca::Basket<DataPoint ,WeightFunc, Ponca::UnorientedSphereFit>;
+
+// Added by me
+using MeanPlaneFit = Ponca::Basket<DataPoint ,WeightFunc, Ponca::MeanPlaneFit>;
+using EllipsoidFit = Ponca::Basket<DataPoint, WeightFunc, Ponca::OrientedEllipsoidFit>;
+using FOEllipsoid2DFit =  Ponca::Basket<DataPoint, WeightFunc, Ponca::FullyOrientedEllipsoid2DFit>;

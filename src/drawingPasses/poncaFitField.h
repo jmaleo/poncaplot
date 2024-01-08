@@ -71,3 +71,7 @@ struct OrientedSphereFitField : public FitField<OrientedSphereFit>{
 struct UnorientedSphereFitField : public FitField<UnorientedSphereFit>{
     void postProcess(typename FitField<UnorientedSphereFit>::FitType& fit) override { fit.applyPrattNorm(); };
 };
+
+// added by me
+using EllipsoidFitField = FitField<EllipsoidFit>;
+using MeanPlaneFitField = FitField<MeanPlaneFit>;

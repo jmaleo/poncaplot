@@ -38,6 +38,11 @@ Screen(Vector2i(1200, 1024), "PoncaPlot"), m_dataMgr(new DataManager()){
     passOrientedSphereFit = new OrientedSphereFitField();
     passUnorientedSphereFit = new UnorientedSphereFitField();
 
+    // added by me
+    passEllipsoidFit = new EllipsoidFitField();
+    passMeanPlaneFit = new MeanPlaneFitField();
+
+
     m_passes[0] = new FillPass( {1,1,1,1});
     m_passes[1] = passOrientedSphereFit;
     m_passes[2] = new ColorMap({1,1,1,1});
@@ -103,7 +108,9 @@ Screen(Vector2i(1200, 1024), "PoncaPlot"), m_dataMgr(new DataManager()){
                                         "Plane",
                                         "Sphere",
                                         "Oriented Sphere",
-                                        "Unoriented Sphere"});
+                                        "Unoriented Sphere",
+                                        "Oriented Ellipsoid",
+                                        "Mean Plane"});
     combo->set_selected_index(3);
     combo->set_callback([this](int id){
         switch (id) {
@@ -112,6 +119,8 @@ Screen(Vector2i(1200, 1024), "PoncaPlot"), m_dataMgr(new DataManager()){
             case 2: m_passes[1] = passSphereFit; break;
             case 3: m_passes[1] = passOrientedSphereFit; break;
             case 4: m_passes[1] = passUnorientedSphereFit; break;
+            case 5: m_passes[1] = passEllipsoidFit; break;
+            case 6: m_passes[1] = passMeanPlaneFit; break;
             default: throw std::runtime_error("Unknown Field type!");
         }
         buildPassInterface(id);
@@ -154,6 +163,8 @@ Screen(Vector2i(1200, 1024), "PoncaPlot"), m_dataMgr(new DataManager()){
             passSphereFit->m_scale = value;
             passOrientedSphereFit->m_scale = value;
             passUnorientedSphereFit->m_scale = value;
+            passEllipsoidFit->m_scale = value;
+            passMeanPlaneFit->m_scale = value;
             renderPasses();
         });
 
@@ -169,6 +180,8 @@ Screen(Vector2i(1200, 1024), "PoncaPlot"), m_dataMgr(new DataManager()){
             passSphereFit->m_iter = value;
             passOrientedSphereFit->m_iter = value;
             passUnorientedSphereFit->m_iter = value;
+            passEllipsoidFit->m_iter = value;
+            passMeanPlaneFit->m_iter = value;
             renderPasses();
         });
     }
@@ -177,6 +190,8 @@ Screen(Vector2i(1200, 1024), "PoncaPlot"), m_dataMgr(new DataManager()){
     CONFIG_PONCA_FIT_INTERFACE(sphereFitWidget,passSphereFit,combo->items()[2])
     CONFIG_PONCA_FIT_INTERFACE(orientedSphereFitWidget,passOrientedSphereFit,combo->items()[3])
     CONFIG_PONCA_FIT_INTERFACE(unorientedSphereFitWidget,passUnorientedSphereFit,combo->items()[4])
+    CONFIG_PONCA_FIT_INTERFACE(ellipsoidFitWidget,passEllipsoidFit,combo->items()[5])
+    CONFIG_PONCA_FIT_INTERFACE(meanPlaneFitWidget,passMeanPlaneFit,combo->items()[6])
 
     // create pass 3 interface
     {
@@ -302,6 +317,7 @@ PoncaPlotApplication::buildPassInterface(int id){
     sphereFitWidget->set_visible(false);
     orientedSphereFitWidget->set_visible(false);
     unorientedSphereFitWidget->set_visible(false);
+    ellipsoidFitWidget->set_visible(false);
     switch (id) {
         case 0:
             distanceFieldWidget->set_visible(true);
@@ -321,6 +337,14 @@ PoncaPlotApplication::buildPassInterface(int id){
         case 4:
             genericFitWidget->set_visible(true);
             unorientedSphereFitWidget->set_visible(true);
+            break;
+        case 5:
+            genericFitWidget->set_visible(true);
+            ellipsoidFitWidget->set_visible(true);
+            break;
+        case 6:
+            genericFitWidget->set_visible(true);
+            meanPlaneFitWidget->set_visible(true);
             break;
         default: throw std::runtime_error("Unknown Field type!");
     }

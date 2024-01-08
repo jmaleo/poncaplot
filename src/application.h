@@ -44,11 +44,13 @@ private:
     MyView *m_image_view {nullptr};
     Widget* pass1Widget, *distanceFieldWidget,
             *genericFitWidget,    //< parameters applicable to all fitting techniques
-    *planeFitWidget, *sphereFitWidget, *orientedSphereFitWidget, *unorientedSphereFitWidget,
+    *planeFitWidget, *sphereFitWidget, *orientedSphereFitWidget, *unorientedSphereFitWidget, *ellipsoidFitWidget, *meanPlaneFitWidget,
             *pass3Widget,*pass4Widget;
     DistanceFieldWithKdTree *passDFWithKdTree;
     PlaneFitField *passPlaneFit;
     SphereFitField *passSphereFit;
     OrientedSphereFitField *passOrientedSphereFit;
     UnorientedSphereFitField *passUnorientedSphereFit;
+    EllipsoidFitField *passEllipsoidFit;
+    MeanPlaneFitField *passMeanPlaneFit;
 };
